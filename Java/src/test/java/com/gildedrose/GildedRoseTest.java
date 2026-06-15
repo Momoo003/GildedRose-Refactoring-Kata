@@ -7,11 +7,34 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GildedRoseTest {
 
     @Test
-    void foo() {
-        Item[] items = new Item[] { new Item("foo", 0, 0) };
+    void normalItemDecreasesInQualityAndSellIn() {
+        Item[] items = { new Item("Normal Item", 10, 20) };
         GildedRose app = new GildedRose(items);
+
         app.updateQuality();
-        assertEquals("fixme", app.items[0].name);
+
+        assertEquals(9, items[0].sellIn);
+        assertEquals(19, items[0].quality);
+    }
+
+    @Test
+    void qualityNeverNegative() {
+        Item[] items = { new Item("Normal Item", 5, 0) };
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(0, items[0].quality);
+    }
+
+    @Test
+    void expiredItemDegradesTwiceAsFast() {
+        Item[] items = { new Item("Normal Item", 0, 10) };
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(8, items[0].quality);
     }
 
 }
