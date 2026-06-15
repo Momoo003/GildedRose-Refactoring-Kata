@@ -77,4 +77,59 @@ class GildedRoseTest {
         assertEquals(80, items[0].quality);
     }
 
+    // Add tests for Backstage passes
+
+    @Test
+    void backstagePassesIncreaseByOneWhenMoreThan10Days() {
+        Item[] items = {
+            new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)
+        };
+
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(21, items[0].quality);
+    }
+
+    @Test
+    void backstagePassesIncreaseByTwoWhen10DaysOrLess() {
+        Item[] items = {
+            new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20)
+        };
+
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(22, items[0].quality);
+    }
+
+    @Test
+    void backstagePassesIncreaseByThreeWhen5DaysOrLess() {
+        Item[] items = {
+            new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20)
+        };
+
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(23, items[0].quality);
+    }
+
+    @Test
+    void backstagePassesDropToZeroAfterConcert() {
+        Item[] items = {
+            new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20)
+        };
+
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(0, items[0].quality);
+    }
+
+    
 }
