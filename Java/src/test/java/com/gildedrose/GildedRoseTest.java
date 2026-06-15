@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GildedRoseTest {
 
+    // Add tests for normal items
+
     @Test
     void normalItemDecreasesInQualityAndSellIn() {
         Item[] items = { new Item("Normal Item", 10, 20) };
@@ -36,5 +38,29 @@ class GildedRoseTest {
 
         assertEquals(8, items[0].quality);
     }
+
+    // Add tests for Aged Brie
+
+    @Test
+    void agedBrieIncreasesInQuality() {
+        Item[] items = { new Item("Aged Brie", 10, 20) };
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(21, items[0].quality);
+    }
+
+    @Test
+    void agedBrieNeverAbove50() {
+        Item[] items = { new Item("Aged Brie", 10, 50) };
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(50, items[0].quality);
+    }
+
+    
 
 }
